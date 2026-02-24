@@ -1,0 +1,19 @@
+# Frontend - Simple Node server to serve static files
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --production
+
+# Copy all frontend files
+COPY . .
+
+# Expose port (Render assigns PORT env var)
+EXPOSE 3000
+
+# Start server
+CMD ["npm", "start"]

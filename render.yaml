@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: admi-frontend
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BACKEND_URL
+        value: https://afdmi-123.onrender.com
+    staticPublishPath: ./
+    routes:
+      - path: /
+        destination: /index.html
