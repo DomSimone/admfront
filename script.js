@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (existingDataSection) {
     loadExistingData();
   }
+const startUploadBtn = document.getElementById('upload-button-id'); 
 
   function handleFileSelect(files) {
     const allowed = [...files].filter(f => /\.(pdf|csv)$/i.test(f.name));
