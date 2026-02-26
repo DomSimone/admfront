@@ -1,14 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use production backend URL from environment or default to Render backend
-  const BACKEND_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:3001'
-    : 'https://afdmi-123.onrender.com';
+  const BACKEND_URL = 'https://domsimone.pythonanywhere.com' 
   
-  const PYTHON_SERVICE_API = window.location.hostname === 'localhost' 
-    ? 'http://localhost:5001'
-    : `${BACKEND_URL}/python`; // Python service proxied through backend
   
-  const NODE_API = `${BACKEND_URL}/api`; // Node.js backend for other operations
+  const PYTHON_SERVICE_API = 'https://domsimone.pythonanywhere.com' // Python service proxied through backend
+  
+  const NODE_API = `https://domsimone.pythonanywhere.com/api`; // Node.js backend for other operations
 
   // ---- Tab Navigation ----
   document.querySelectorAll('.tab').forEach(tab => {
