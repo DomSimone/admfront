@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use production backend URL from environment or default to Render backend
-  const BACKEND_URL = 'https://www.pythonanywhere.com/user/domsimone/consoles/45399236/' 
+  const BACKEND_URL = 'https://www.pythonanywhere.com/user/domsimone/process' 
   
   
   const PYTHON_SERVICE_API = 'https://www.pythonanywhere.com/user/domsimone/process' // Python service proxied through backend
