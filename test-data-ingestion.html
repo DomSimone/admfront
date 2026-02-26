@@ -46,8 +46,11 @@
     </div>
 
     <script>
-        const PYTHON_SERVICE_API = 'http://localhost:5001';
-        const NODE_API = 'http://localhost:3001/api';
+        // Use production backend URL - deployed at Vercel, connects to Render backend
+        const isLocalhost = window.location.hostname === 'localhost';
+        const BACKEND_URL = isLocalhost ? 'http://localhost:3001' : 'https://admibckend.onrender.com';
+        const PYTHON_SERVICE_API = isLocalhost ? 'http://localhost:5001' : `${BACKEND_URL}/python`;
+        const NODE_API = `${BACKEND_URL}/api`;
 
         async function testPythonService() {
             const statusDiv = document.getElementById('python-status');
