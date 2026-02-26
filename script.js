@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use production backend URL from environment or default to Render backend
-  const BACKEND_URL = 'https://domsimone.pythonanywhere.com' 
+  const BACKEND_URL = 'https://www.pythonanywhere.com/user/domsimone/consoles/45399236/' 
   
   
-  const PYTHON_SERVICE_API = 'https://domsimone.pythonanywhere.com' // Python service proxied through backend
+  const PYTHON_SERVICE_API = 'https://www.pythonanywhere.com/user/domsimone/consoles/45399236/' // Python service proxied through backend
   
-  const NODE_API = `https://domsimone.pythonanywhere.com/api`; // Node.js backend for other operations
+  const NODE_API = `https://www.pythonanywhere.com/user/domsimone/consoles/45399236/`; // Node.js backend for other operations
 
   // ---- Tab Navigation ----
   document.querySelectorAll('.tab').forEach(tab => {
