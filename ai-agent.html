@@ -189,8 +189,11 @@
         ? 'http://localhost:3001'
         : 'https://admibckend-1.onrender.com';
     
-    const PYTHON_API = `${BACKEND_URL}/python`;  // Python langextract service proxied through Node.js
-    const NODE_API = `${BACKEND_URL}/api`;  // Node.js backend for terminal
+  const BACKEND_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:5001'  // Corrected to port 5001 to match Python
+    : 'https://admibckend-1.onrender.com';
+
+  const PYTHON_API = BACKEND_URL;
     // ============================================================
     // PYDANTIC-STYLE SCHEMA DEFINITIONS (JavaScript mirrors Python)
     // ============================================================
