@@ -1,8 +1,60 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use consistent backend URL for both services
+  if (analyzeBtn) {
+        analyzeBtn.addEventListener('click', async () => {
+            const file = uploadInput.files[0];
+            
+            if (!file) {
+                alert("Please select a file first.");
+                return;
+            }
+
+            // UI Feedback
+            statusMsg.innerText = "Processing document...";
+            analyzeBtn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                // Adjust the URL to your actual backend endpoint
+                const response = await fetch('https://admfront-gumxokh2c-pmpanashe489-3815s-projects.vercel.app/ai-agent.html', {
+                    method: 'POST',
+                    body: formData
+                    // Note: Do NOT set Content-Type header manually when sending FormData
+                });
+              
   const BACKEND_URL ='https://admibckend-1.onrender.com' 
     ? 'https://admibckend-1.onrender.com';
     : 'http://127.0.0.1:5001'
+
+  if (!response.ok) throw new Error('Ingestion failed');
+
+                const data = await response.json();
+                displayResults(data);
+                statusMsg.innerText = "Analysis complete.";
+            } catch (error) {
+                console.error("Error:", error);
+                statusMsg.innerText = "Error uploading document.";
+            } finally {
+                analyzeBtn.disabled = false;
+            }
+        });
+    }
+
+    function displayResults(data) {
+        // Glitch fix: Clear placeholder and format the JSON/text output
+        resultsContainer.innerHTML = ''; 
+        
+        if (data.extraction) {
+            const pre = document.createElement('pre');
+            pre.textContent = JSON.stringify(data.extraction, null, 2);
+            resultsContainer.appendChild(pre);
+        } else {
+            resultsContainer.innerHTML = '<p>No data extracted.</p>';
+        }
+    }
+});            
   
   const PYTHON_SERVICE_API = 'https://admibckend-1.onrender.com/process'; // Python service proxied through Node.js
   const NODE_API = `https://admibckend-1.onrender.com/api`; // Node.js backend for other operations
