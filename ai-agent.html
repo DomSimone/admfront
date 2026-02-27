@@ -134,6 +134,21 @@
           </div>
         </div>
 
+        <section id="ingestion-section">
+    <h2>Document Ingestion</h2>
+    <div class="upload-container">
+        <input type="file" id="document-upload" accept=".pdf,.doc,.docx,.txt">
+        <button id="analyze-button" class="btn-primary">Upload & Analyze</button>
+    </div>
+    <div id="upload-status" class="status-message"></div>
+</section>
+
+<section id="extraction-section">
+    <h2>Extracted Information</h2>
+    <div id="extraction-results" class="results-container">
+        <p class="placeholder-text">Upload a document to see extracted data...</p>
+    </div>
+</section>
         <div class="card terminal-output-card">
           <h2><i data-lucide="bar-chart-2"></i> Terminal Output</h2>
           <div class="output-tabs">
