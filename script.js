@@ -140,6 +140,22 @@ fetch(`${API_BASE_URL}/python/health`)
       alert('Maximum 20 files allowed. Please select fewer files.');
       return;
     }
+
+    function handleMultipleFiles(files) {
+        const allowedFiles = [...files].filter(f => /\.(pdf|csv)$/i.test(f.name));
+        
+        if (allowedFiles.length === 0) return;
+
+        // Set the first file as the current active file for extraction
+        currentFile = allowedFiles[0]; 
+        window.selectedFiles = allowedFiles;
+        
+        fileCount.textContent = `${allowedFiles.length} files selected`;
+        fileList.innerHTML = allowedFiles.map(f => 
+          `<div style="color: var(--primary-green); margin: 4px 0;"><i data-lucide="file"></i> ${f.name} (${formatBytes(f.size)})</div>`
+        ).join('');
+        lucide.createIcons();
+      }
     
     // Check file size limit (15MB per file)
     const maxSize = 15 * 1024 * 1024; // 15MB in bytes
