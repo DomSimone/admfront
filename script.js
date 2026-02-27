@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use consistent backend URL for both services
-  const BACKEND_URL ='https://admibckend-1.onrender.com' === 'localhost' 
-    ? 'http://127.0.0.1:5001'
-    : 'https://admibckend-1.onrender.com';
+  const BACKEND_URL ='http://127.0.0.1:5001' === 'localhost' 
+    ? 'https://admibckend-1.onrender.com';
     : 'http://127.0.0.1:5001'
   
   const PYTHON_SERVICE_API = 'https://admibckend-1.onrender.com'; // Python service proxied through Node.js
