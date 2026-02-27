@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ? 'https://admibckend-1.onrender.com';
     : 'http://127.0.0.1:5001'
   
-  const PYTHON_SERVICE_API = 'https://admibckend-1.onrender.com'; // Python service proxied through Node.js
+  const PYTHON_SERVICE_API = 'https://admibckend-1.onrender.com/process'; // Python service proxied through Node.js
   const NODE_API = `https://admibckend-1.onrender.com/api`; // Node.js backend for other operations
-  const API = 'http://127.0.0.1:5001'; // For backward compatibility
+  const API = 'https://admibckend-1.onrender.com'; // For backward compatibility
 
   // ---- Tab Navigation ----
   document.querySelectorAll('.tab').forEach(tab => {
