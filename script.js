@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use consistent backend URL for both services
-  const BACKEND_URL ='http://127.0.0.1:5001' === 'localhost' 
+  const BACKEND_URL ='https://admibckend-1.onrender.com' 
     ? 'https://admibckend-1.onrender.com';
     : 'http://127.0.0.1:5001'
   
