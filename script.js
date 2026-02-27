@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
               
  const API_BASE_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:5001' 
+    ? 'http://127.0.0.1:5000' 
     : 'https://admibckend-1.onrender.com';
 
 // Then use it in your fetch:
