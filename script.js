@@ -24,9 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Note: Do NOT set Content-Type header manually when sending FormData
                 });
               
+ const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:5001' 
+    : 'https://admibckend-1.onrender.com';
+
+// Then use it in your fetch:
+fetch(`${API_BASE_URL}/python/health`)             
   const BACKEND_URL = localhost=='https://admibckend-1.onrender.com' 
     ? 'https://admibckend-1.onrender.com';
-    : 'http://127.0.0.1:5001'
+    : 'http://127.0.0.1:5001';
 
   if (!response.ok) throw new Error('Ingestion failed');
 
