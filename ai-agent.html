@@ -751,7 +751,7 @@
             extractOutput.innerHTML = `<div class="error-message" style="color: var(--error); padding: 16px;">
               <i data-lucide="alert-circle"></i> 
               <strong>Error:</strong> ${error.message}
-              <br><small style="color: #666;">Ensure the backend server is running at 'https://admfront-ibzanzy6u-pmpanashe489-3815s-projects.vercel.app'</small>
+              <br><small style="color: #666;">Ensure the backend server is running at 5001</small>
             </div>`;
             lucide.createIcons();
           } finally {
@@ -1080,7 +1080,7 @@
           console.log('Backend service health:', health);
         } catch (err) {
           console.warn('Backend service not available:', err.message);
-          console.warn('Ensure the backend server is running at https://admfront-ibzanzy6u-pmpanashe489-3815s-projects.vercel.app');
+          console.warn('Ensure the backend server is running at 5001');
         }
       }
 
