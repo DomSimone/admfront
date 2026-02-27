@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Note: Do NOT set Content-Type header manually when sending FormData
                 });
               
-  const BACKEND_URL ='https://admibckend-1.onrender.com' 
+  const BACKEND_URL = localhost=='https://admibckend-1.onrender.com' 
     ? 'https://admibckend-1.onrender.com';
     : 'http://127.0.0.1:5001'
 
