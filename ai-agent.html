@@ -63,6 +63,22 @@
           <div class="file-list" id="fileList"></div>
         </div>
 
+        <section id="ingestion-section">
+    <h2>Document Ingestion</h2>
+    <div class="upload-container">
+        <input type="file" id="document-upload" accept=".pdf,.doc,.docx,.txt">
+        <button id="analyze-button" class="btn-primary">Upload & Analyze</button>
+    </div>
+    <div id="upload-status" class="status-message"></div>
+</section>
+
+<section id="extraction-section">
+    <h2>Extracted Information</h2>
+    <div id="extraction-results" class="results-container">
+        <p class="placeholder-text">Upload a document to see extracted data...</p>
+    </div>
+</section>
+
         <div class="card extract-card">
           <h2><i data-lucide="sparkles"></i> AI-Powered Extraction</h2>
           <p class="card-desc">Describe what data to extract (e.g., "Author, Title, Date, Publisher")</p>
