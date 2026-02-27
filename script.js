@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use consistent backend URL for both services
   const BACKEND_URL ='https://admibckend-1.onrender.com' === 'localhost' 
-    ? 'http://localhost:3001'
+    ? 'http://127.0.0.1:5001'
     : 'https://admibckend-1.onrender.com';
+    : 'http://127.0.0.1:5001'
   
   const PYTHON_SERVICE_API = 'https://admibckend-1.onrender.com'; // Python service proxied through Node.js
   const NODE_API = `https://admibckend-1.onrender.com/api`; // Node.js backend for other operations
-  const API = 'https://admibckend-1.onrender.com'; // For backward compatibility
+  const API = 'http://127.0.0.1:5001'; // For backward compatibility
 
   // ---- Tab Navigation ----
   document.querySelectorAll('.tab').forEach(tab => {
