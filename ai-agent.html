@@ -186,8 +186,7 @@
     
     // Use consistent backend URL for both services
     const BACKEND_URL = 'https://admibckend-1.onrender.com' === 'localhost' 
-        ? 'http://127.0.0.1:5001'
-        : 'https://admibckend-1.onrender.com';
+        : ?'https://admibckend-1.onrender.com';
     
     const PYTHON_API = `https://admibckend-1.onrender.com/python`;  // Python langextract service proxied through Node.js
     const NODE_API = `https://admibckend-1.onrender.com/api`;  // Node.js backend for terminal
@@ -751,7 +750,7 @@
             extractOutput.innerHTML = `<div class="error-message" style="color: var(--error); padding: 16px;">
               <i data-lucide="alert-circle"></i> 
               <strong>Error:</strong> ${error.message}
-              <br><small style="color: #666;">Ensure the backend server is running at 'http://127.0.0.1:5001'</small>
+              <br><small style="color: #666;">Ensure the backend server is running at 'https://admibckend-1.onrender.com/process'</small>
             </div>`;
             lucide.createIcons();
           } finally {
@@ -1080,7 +1079,7 @@
           console.log('Backend service health:', health);
         } catch (err) {
           console.warn('Backend service not available:', err.message);
-          console.warn('Ensure the backend server is running at http://127.0.0.1:5001');
+          console.warn('Ensure the backend server is running at https://admibckend-1.onrender.com/process');
         }
       }
 
