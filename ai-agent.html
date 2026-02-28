@@ -185,10 +185,10 @@
     // ============================================================
     
     // Use consistent backend URL for both services
-    const BACKEND_URL = 'https://admibckend-1.onrender.com';
+    const BACKEND_URL = 'https://admibckend.onrender.com';
     const PYTHON_SERVICE_API = `${BACKEND_URL}/python`; // If proxied through Node
     // OR if calling the Python service directly (on port 5001 usually)
-    const DIRECT_PYTHON_API = 'https://admibckend-1.onrender.com'
+    const DIRECT_PYTHON_API = 'https://admibckend.onrender.com'
     // ============================================================
     // PYDANTIC-STYLE SCHEMA DEFINITIONS (JavaScript mirrors Python)
     // ============================================================
@@ -757,7 +757,7 @@
             extractOutput.innerHTML = `<div class="error-message" style="color: var(--error); padding: 16px;">
               <i data-lucide="alert-circle"></i> 
               <strong>Error:</strong> ${error.message}
-              <br><small style="color: #666;">Ensure the backend server is running at https://admibckend-1.onrender.com</small>
+              <br><small style="color: #666;">Ensure the backend server is running at https://admibckend.onrender.com</small>
             </div>`;
             lucide.createIcons();
           } finally {
@@ -1086,7 +1086,7 @@
           console.log('Backend service health:', health);
         } catch (err) {
           console.warn('Backend service not available:', err.message);
-          console.warn('Ensure the backend server is running at https://admibckend-1.onrender.com');
+          console.warn('Ensure the backend server is running at https://admibckend.onrender.com');
         }
       }
 
