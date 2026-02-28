@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use consistent backend URL for both services
-  const BACKEND_URL = 'https://admibckend.onrender.com';
+  const BACKEND_URL = 'https://admibckend-1.onrender.com';
   const PYTHON_SERVICE_API = `${BACKEND_URL}/python`; // If proxied through Node
-  const DIRECT_PYTHON_API = 'https://admibckend.onrender.com';
-  const NODE_API = `https://admibckend.onrender.com/api`; // Node.js backend for other operations
+  const DIRECT_PYTHON_API = 'https://admibckend-1.onrender.com';
+  const NODE_API = `https://admibckend-1.onrender.com/api`; // Node.js backend for other operations
 
   // ---- Tab Navigation ----
   document.querySelectorAll('.tab').forEach(tab => {
