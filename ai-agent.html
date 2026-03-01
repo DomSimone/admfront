@@ -186,11 +186,11 @@
     
     // Use consistent backend URL for both services
     const BACKEND_URL = window.location.hostname === 'localhost' 
-        ? 'http://localhost:3001'
+        ? 'https://admibckend-1.onrender.com:3001'
         : 'https://admibackend-1.onrender.com';
     
-    const PYTHON_API = `${BACKEND_URL}/python`;  // Python langextract service proxied through Node.js
-    const NODE_API = `${BACKEND_URL}/api`;  // Node.js backend for terminal
+    const PYTHON_API = `https://admibckend-1.onrender.com:10000/api`;  // Python langextract service proxied through Node.js
+    const NODE_API = `https://admibckend-1.onrender.com:10000/api`;  // Node.js backend for terminal
     // ============================================================
     // PYDANTIC-STYLE SCHEMA DEFINITIONS (JavaScript mirrors Python)
     // ============================================================
