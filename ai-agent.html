@@ -751,7 +751,7 @@
             extractOutput.innerHTML = `<div class="error-message" style="color: var(--error); padding: 16px;">
               <i data-lucide="alert-circle"></i> 
               <strong>Error:</strong> ${error.message}
-              <br><small style="color: #666;">Ensure the backend server is running at admibckend-1.onrender.com</small>
+              <br><small style="color: #666;">Ensure the backend server is running at http://localhost:10000/python</small>
             </div>`;
             lucide.createIcons();
           } finally {
@@ -1080,7 +1080,7 @@
           console.log('Backend service health:', health);
         } catch (err) {
           console.warn('Backend service not available:', err.message);
-          console.warn('Ensure the backend server is running at admibckend-1.onrender.com');
+          console.warn('Ensure the backend server is running at http://localhost:10000/python');
         }
       }
 
