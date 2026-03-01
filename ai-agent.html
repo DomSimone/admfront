@@ -8,6 +8,25 @@
   <link rel="stylesheet" href="style.css">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .origin-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+    .origin-african {
+      background-color: #e6fffa;
+      color: #00695c;
+      border: 1px solid #b2f5ea;
+    }
+    .origin-other {
+      background-color: #f7fafc;
+      color: #4a5568;
+      border: 1px solid #e2e8f0;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -47,7 +66,7 @@
           <h2><i data-lucide="upload"></i> Document Ingestion & Analysis</h2>
           <p class="card-desc">Upload PDF or CSV files for AI-powered extraction</p>
           <div class="dropzone" id="dropzone">
-            <input type="file" id="fileInput" accept=".pdf,.csv" multiple hidden>
+            <input type="file" id="fileInput" accept=".pdf,.csv,.xlsx,.xls" multiple hidden>
             <i data-lucide="upload-cloud" style="width: 48px; height: 48px; color: var(--primary-green); margin-bottom: 10px;"></i>
             <span class="dropzone-text">Drop files here or click to browse</span>
             <span class="dropzone-count" id="fileCount">No files selected</span>
@@ -379,8 +398,15 @@
         html += '<tbody>';
         data.forEach((row, idx) => {
           html += `<tr data-row="${idx}">`;
-          row.forEach(cell => {
-            html += `<td>${this.escapeHtml(String(cell ?? ''))}</td>`;
+          row.forEach((cell, colIdx) => {
+            // Check if this is the 'Origin' column
+            const header = headers[colIdx];
+            if (header === 'Origin') {
+                const originClass = cell === 'African' ? 'origin-african' : 'origin-other';
+                html += `<td><span class="origin-badge ${originClass}">${this.escapeHtml(String(cell ?? ''))}</span></td>`;
+            } else {
+                html += `<td>${this.escapeHtml(String(cell ?? ''))}</td>`;
+            }
           });
           html += '</tr>';
         });
@@ -520,8 +546,8 @@
 
       function handleFileSelect(file) {
         const ext = file.name.toLowerCase().split('.').pop();
-        if (!['pdf', 'csv'].includes(ext)) {
-          alert('Only PDF and CSV files are supported');
+        if (!['pdf', 'csv', 'xlsx', 'xls'].includes(ext)) {
+          alert('Only PDF, CSV, and Excel files are supported');
           return;
         }
 
@@ -539,7 +565,7 @@
       }
 
       function handleMultipleFiles(files) {
-        const allowedFiles = [...files].filter(f => /\.(pdf|csv)$/i.test(f.name));
+        const allowedFiles = [...files].filter(f => /\.(pdf|csv|xlsx|xls)$/i.test(f.name));
         
         if (allowedFiles.length > 20) {
           alert('Maximum 20 files allowed. Please select fewer files.');
@@ -630,7 +656,6 @@
         }
 
         const result = await response.json();
-
         if (!result.success) {
           throw new Error(result.error || 'Extraction failed');
         }
