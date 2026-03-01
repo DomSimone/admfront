@@ -66,7 +66,7 @@
         <div class="card extract-card">
           <h2><i data-lucide="sparkles"></i> AI-Powered Extraction</h2>
           <p class="card-desc">Describe what data to extract (e.g., "Author, Title, Date, Publisher")</p>
-          <textarea id="extractPrompt" placeholder="Enter extraction prompt...&#10;Example: Author, Title, Date Published, Institution"></textarea>
+          <textarea id="extractPrompt" placeholder="Enter extraction prompt...&#10;Example: from 'REFERENCES' Section extract 'Author', 'Title', 'Date', 'Institution'"></textarea>
           <div class="format-row">
             <label>Output format:</label>
             <select id="outputFormat">
@@ -75,9 +75,14 @@
               <option value="csv">CSV</option>
             </select>
           </div>
-          <button class="btn primary" id="extractBtn">
-            <i data-lucide="sparkles"></i> Extract with AI
-          </button>
+          <div class="button-group" style="margin-top: 10px; display: flex; gap: 10px;">
+            <button class="btn primary" id="extractBtn">
+              <i data-lucide="sparkles"></i> Extract with AI
+            </button>
+            <button class="btn secondary" id="exampleBtn" title="Use example prompt">
+              <i data-lucide="lightbulb"></i> Try Example
+            </button>
+          </div>
         </div>
 
         <div class="card analog-card">
@@ -270,7 +275,7 @@
         rows: new Field({ description: 'List of extracted records', type: 'array', required: true, default: [] }),
         headers: new Field({ description: 'Column headers', type: 'array', required: true, default: [] }),
         metadata: new Field({ description: 'Extraction metadata', type: 'object', required: false, default: {} }),
-        schema_version: new Field({ description: 'Schema version', type: 'string', required: false, default: '1.0' })
+        schema_version: new Field({ description: 'Schema version', type: 'string', required: false, default: '2.0' })
       };
 
       static getFields() {
@@ -661,7 +666,7 @@
             total_files: results.length,
             combined_records: allExtractions.length
           },
-          schema_version: '1.0'
+          schema_version: '2.0'
         });
 
         // Create output renderer
@@ -684,9 +689,16 @@
       // ============================================================
 
       const extractBtn = document.getElementById('extractBtn');
+      const exampleBtn = document.getElementById('exampleBtn');
       const extractPrompt = document.getElementById('extractPrompt');
       const outputFormat = document.getElementById('outputFormat');
       const extractOutput = document.getElementById('extractOutput');
+
+      if (exampleBtn) {
+        exampleBtn.addEventListener('click', () => {
+          extractPrompt.value = `from "REFERENCES" Section extract "Author name", "Title", "Date Published", "Institution/Publishing House"`;
+        });
+      }
 
       if (extractBtn) {
         extractBtn.addEventListener('click', async () => {
@@ -735,7 +747,7 @@
               rows: result.extractions || [],
               headers: result.headers || [],
               metadata: result.metadata || {},
-              schema_version: '1.0'
+              schema_version: '2.0'
             });
 
             // Create output renderer
