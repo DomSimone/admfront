@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Use consistent backend URL for both services
-  const BACKEND_URL = https://admibckend-1.onrender.com === 'localhost' 
+  const BACKEND_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3001'
     : 'https://admibckend-1.onrender.com';
   
-  const PYTHON_SERVICE_API = `https://admibckend-1.onrender.com:10000/python`; // Python service proxied through Node.js
-  const NODE_API = `https://admibckend-1.onrender.com:10000/api`; // Node.js backend for other operations
+  const PYTHON_SERVICE_API = `${BACKEND_URL}/python`; // Python service proxied through Node.js
+  const NODE_API = `${BACKEND_URL}/api`; // Node.js backend for other operations
   const API = BACKEND_URL; // For backward compatibility
 
   // ---- Tab Navigation ----
@@ -104,6 +104,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const docSel = document.getElementById('docSelector');
       if (sel) sel.innerHTML = ingestedFiles.map((f, i) => `<option value="${i}">${f.name}</option>`).join('');
       if (docSel) docSel.classList.toggle('hidden', ingestedFiles.length <= 1);
+
+      // Intelligent Prompt Suggestion
+      suggestPrompt(ingestedFiles[0]);
+    }
+  }
+
+  function suggestPrompt(file) {
+    const modelParams = document.getElementById('modelParams');
+    if (!modelParams) return;
+
+    const fileName = file.name.toLowerCase();
+    let suggestion = '';
+
+    if (fileName.includes('invoice') || fileName.includes('receipt')) {
+      suggestion = 'Extract: Invoice Number, Date, Total Amount, Vendor Name, Line Items';
+    } else if (fileName.includes('resume') || fileName.includes('cv')) {
+      suggestion = 'Extract: Name, Email, Phone, Skills, Experience, Education';
+    } else if (fileName.includes('financial') || fileName.includes('statement')) {
+      suggestion = 'Extract: Date, Description, Amount, Balance, Category';
+    } else {
+      suggestion = 'Extract: Title, Date, Author, Summary, Key Points';
+    }
+
+    // Only set if empty to avoid overwriting user input
+    if (!modelParams.value.trim()) {
+      modelParams.value = suggestion;
     }
   }
 
@@ -287,7 +313,10 @@ document.addEventListener('DOMContentLoaded', () => {
   async function processSingleFile(file, modelType, params) {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('prompt', getPromptForModel(modelType, params));
+
+    // Use the user's prompt or a default based on model type
+    const prompt = params || getPromptForModel(modelType, params);
+    formData.append('prompt', prompt);
 
     const response = await fetch(`${PYTHON_SERVICE_API}/process`, {
       method: 'POST',
@@ -383,11 +412,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let prompt = modelPrompts[modelType] || 'Extract relevant data from this document';
     
     if (params) {
-      try {
-        const parsedParams = JSON.parse(params);
-        prompt += ' with parameters: ' + JSON.stringify(parsedParams);
-      } catch (e) {
-        prompt += ' with parameters: ' + params;
+      // If params is just a string (not JSON), append it
+      if (!params.trim().startsWith('{')) {
+         prompt += ': ' + params;
+      } else {
+         try {
+            const parsedParams = JSON.parse(params);
+            prompt += ' with parameters: ' + JSON.stringify(parsedParams);
+         } catch (e) {
+            prompt += ' with parameters: ' + params;
+         }
       }
     }
 
@@ -782,10 +816,10 @@ document.addEventListener('DOMContentLoaded', () => {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { labels: { color: '#e6edf3' } } },
+        plugins: { legend: { labels: { color: '#333' } } },
         scales: {
-          x: { ticks: { color: '#8b949e', maxRotation: 45 }, grid: { color: '#2d3a4d' } },
-          y: { ticks: { color: '#8b949e' }, grid: { color: '#2d3a4d' } }
+          x: { ticks: { color: '#666', maxRotation: 45 }, grid: { color: '#e0e0e0' } },
+          y: { ticks: { color: '#666' }, grid: { color: '#e0e0e0' } }
         }
       }
     });
